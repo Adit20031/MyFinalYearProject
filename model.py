@@ -31,12 +31,15 @@ X=df[df.columns[2:]]
 y=df['Label']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 X.head()
-log_reg = LogisticRegression()
-log_reg.fit(X_train, y_train)
-y_pred_log_reg=log_reg.predict(X_test)
-#accuracy_score(y_test, y_pred_log_reg)
-print(y_pred_log_reg)
-joblib.dump(log_reg, 'logisticRegression.pkl') 
+# instantiate the model
+forest = RandomForestClassifier(max_depth=5)
+
+# fit the model 
+forest.fit(X_train, y_train)
+y_test_forest = forest.predict(X_test)
+y_train_forest = forest.predict(X_train)
+print(y_train_forest)
+joblib.dump(forest, 'randomforest.pkl') 
 with open('myVectorizer', 'wb') as file:
     pickle.dump(vectorizer, file)
 
