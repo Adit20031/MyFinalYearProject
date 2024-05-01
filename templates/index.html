@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Form</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            padding: 3px;
+            font-family: 'Didot', serif;
+        }
+
+        .container {
+            background-color: rgba(34, 20, 223, 0.8);
+            padding: 45px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(196, 8, 86, 0.3);
+            max-width: 650px;
+            text-align: center;
+            animation: slideIn 1s ease;
+            margin: 0 auto;
+            margin-top:17px;
+            margin-bottom:0px; /* Adjust this value according to your footer height */
+            position: relative;
+            z-index: 1;
+            max-height:500px;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            padding: 3px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 2;
+            font-family: 'Didot', serif;
+
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 25px;
+            margin-bottom: 0px;
+            font-family: 'Pacifico', cursive;
+        }
+
+        label {
+            font-size: 28px;
+            margin-bottom: 30px;
+            display: block;
+            font-family: 'Pacifico', cursive;
+
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 40px);
+            padding: 15px;
+            margin-bottom: 30px;
+            border: 3px solid #ccc;
+            border-radius: 15px;
+            font-size: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 20px 40px;
+            border: none;
+            border-radius: 15px;
+            font-size: 22px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 0px;
+        }
+
+        button:hover {
+            background-color: #d01b88;
+        }
+
+        #submitButton {
+            background-color: #4CAF50;
+            color: white;
+            font-family: 'Pacifico', cursive;
+        }
+
+        #b23 {
+            background-image: url("/static/as45.jpg");
+        }
+    </style>
+</head>
+<body id="b23">
+    <div class="header">
+        <h3>Welcome to Our Secure Form</h3>
+    </div>
+    <div class="container">
+        <form id="myForm" method="post" action="{{url_for('predict_sql_data')}}">
+            <div class="form-group">
+                <label for="textInput">Enter your username:</label>
+                <input type="text" id="textInput" name="textInput" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Enter your password:</label>
+                <input type="password" id="pass1" name="pass13" required>
+            </div>
+            <div class="btn-container">
+                <button type="submit" id="submitButton">Submit</button>
+            </div>
+        </form>
+        <h1>{{prediction_text}}</h1>
+    </div>
+    <footer>
+        <p>&copy; 2024 Secure Form. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
+
+

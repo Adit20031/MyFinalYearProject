@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Containerized Student Details Management</title>
+<script>
+    let students = []; // This will act as our "database" for this example
+    
+    function renderTable() {
+      const tbody = document.querySelector('#studentsTable tbody');
+      tbody.innerHTML = ''; // Clear existing rows
+      students.forEach((student, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${student.id}</td>
+          <td>${student.name}</td>
+          <td>${student.age}</td>
+          <td><button onclick="deleteStudent(${index})">Delete</button></td>
+        `;
+        row.classList.add("fade-in");
+        tbody.appendChild(row);
+      });
+    }
+    
+    function insertStudent() {
+      const id = prompt("Enter student ID:");
+      const name = prompt("Enter student name:");
+      const age = prompt("Enter student age:");
+      students.push({ id, name, age });
+      renderTable();
+    }
+    
+    function updateStudent() {
+      const id = prompt("Enter student ID to update:");
+      const student = students.find(student => student.id === id);
+      if (student) {
+        student.name = prompt("Enter new student name:", student.name);
+        student.age = prompt("Enter new student age:", student.age);
+        renderTable();
+      } else {
+        alert("Student not found!");
+      }
+    }
+    
+    function deleteStudent(index) {
+      students[index].deleting = true; // Mark as deleting (for potential animation)
+      renderTable();
+      setTimeout(() => {
+        students.splice(index, 1); // Remove the student from the array after animation
+        renderTable();
+      }, 250); // Delay to allow for animation, adjust timing as needed
+    }
+    
+    document.getElementById('insertBtn').addEventListener('click', insertStudent);
+    document.getElementById('updateBtn').addEventListener('click', updateStudent);
+    // Initial render
+    renderTable();
+</script>    
+<style>
+  body, html {
+    background-image: url("Designer.png");
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6f761f7b;
+    background-image: url('ad2.jpg');
+  }
+  .container {
+    text-align: center;
+    background-color: #18c22c;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  table, th, td {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    padding: 10px;
+    margin: 20px auto; /* Centering table */
+    text-align: left;
+  }
+  th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  tr:nth-child(even) {background-color: #f2f2f2;}
+  .button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block; /* For centering */
+    margin: 0 10px; /* Space between buttons */
+  }
+  .button:hover {
+    background-color: #007B9E;
+    transform: translateY(-2px);
+  }
+  .fade-in {
+    animation: fadeIn 0.5s;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.5s forwards;
+}
+
+.slide-out {
+  animation: slideOut 0.5s forwards;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>ADMIN PANEL</h1>
+
+  <button class="button" id="insertBtn" onclick="insertStudent()">Insert Student Detail</button>
+  <button class="button" id="updateBtn" onclick="updateStudent()">Update Student Detail</button>
+  <button class="button" id="deleteBtn" onclick="deleteStudent()">Delete Student Detail</button>
+
+  <table id="studentsTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Student rows will be inserted here -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+// JavaScript logic remains the same
+</script>
+
+</body>
+</html>
